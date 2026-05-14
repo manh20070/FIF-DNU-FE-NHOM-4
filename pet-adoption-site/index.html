@@ -1,22 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Adoption Site</title>
-    <link rel="stylesheet" href="src/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetAdopt</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Pet Adoption Site</h1>
-        <p>Find your new best friend!</p>
-    </header>
-    <main id="pet-list">
-        <!-- Pet cards will be dynamically inserted here -->
-    </main>
-    <footer>
-        <p>&copy; 2023 Pet Adoption Site</p>
-    </footer>
-    <script src="src/js/app.js"></script>
+
+<header>
+  🐶 PetAdopt - Nhận Nuôi Thú Cưng
+</header>
+
+<nav>
+  <button onclick="showSection('publicSection')">
+    🌐 Public
+  </button>
+
+  <button onclick="showSection('adminSection')">
+    ⚙️ Admin
+  </button>
+</nav>
+
+<div class="container">
+
+  <!-- PUBLIC -->
+  <section id="publicSection">
+
+    <h2 class="section-title">
+      Danh Sách Thú Cưng
+    </h2>
+
+    <div class="filters">
+
+      <select id="filterSpecies" onchange="renderPets()">
+        <option value="all">Tất cả loài</option>
+        <option value="Chó">Chó</option>
+        <option value="Mèo">Mèo</option>
+        <option value="Thỏ">Thỏ</option>
+      </select>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Tìm thú cưng..."
+        onkeyup="renderPets()"
+      >
+
+    </div>
+
+    <div class="grid" id="petList"></div>
+
+  </section>
+
+  <!-- ADMIN -->
+  <section id="adminSection" class="hidden">
+
+    <h2 class="section-title">
+      Quản Lý Thú Cưng
+    </h2>
+
+    <form id="petForm">
+
+      <input type="hidden" id="petId">
+
+      <input
+        type="text"
+        id="petName"
+        placeholder="Tên thú cưng"
+        required
+      >
+
+      <input
+        type="text"
+        id="petSpecies"
+        placeholder="Loài"
+        required
+      >
+
+      <input
+        type="number"
+        id="petAge"
+        placeholder="Tuổi"
+        required
+      >
+
+      <input
+        type="text"
+        id="petImage"
+        placeholder="Link ảnh"
+        required
+      >
+
+      <textarea
+        id="petDescription"
+        placeholder="Mô tả"
+        required
+      ></textarea>
+
+      <select id="petStatus">
+        <option value="Còn">Còn</option>
+        <option value="Đang chờ">Đang chờ</option>
+        <option value="Đã được nhận">Đã được nhận</option>
+      </select>
+
+      <button type="submit">
+        Lưu Thú Cưng
+      </button>
+
+    </form>
+
+    <div class="grid" id="adminPetGrid"></div>
+
+    <h2 class="section-title">
+      Danh Sách Đơn Nhận Nuôi
+    </h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Người đăng ký</th>
+          <th>Thú cưng</th>
+          <th>SĐT</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+
+      <tbody id="adoptionTable"></tbody>
+
+    </table>
+
+  </section>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal hidden" id="modal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeModal()">
+      &times;
+    </span>
+
+    <div id="modalBody"></div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
