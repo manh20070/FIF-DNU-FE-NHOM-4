@@ -1,0 +1,28 @@
+{
+  "name": "pet-adoption-site",
+  "version": "1.0.0",
+  "description": "A website for pet adoption, showcasing available pets and facilitating the adoption process.",
+  "main": "src/js/app.js",
+  "scripts": {
+    "start": "live-server",
+    "build": "webpack --mode production",
+    "test": "jest"
+  },
+  "keywords": [
+    "pet",
+    "adoption",
+    "website",
+    "animals"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0",
+    "live-server": "^1.2.1"
+  }
+}
