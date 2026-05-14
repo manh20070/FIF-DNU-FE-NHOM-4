@@ -1,0 +1,206 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#f4f7fb;
+}
+
+header{
+  background:#ff7b54;
+  color:white;
+  padding:20px;
+  text-align:center;
+  font-size:28px;
+  font-weight:bold;
+}
+
+nav{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  background:white;
+  padding:15px;
+}
+
+nav button{
+  padding:10px 20px;
+  border:none;
+  background:#ff7b54;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.container{
+  width:95%;
+  margin:auto;
+  padding:20px 0;
+}
+
+.filters{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.filters input,
+.filters select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:15px;
+}
+
+.badge{
+  padding:5px 10px;
+  border-radius:20px;
+  color:white;
+  font-size:13px;
+}
+
+.available{
+  background:#28a745;
+}
+
+.pending{
+  background:#ffc107;
+  color:black;
+}
+
+.adopted{
+  background:#dc3545;
+}
+
+.card-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.card-buttons button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  color:white;
+  cursor:pointer;
+}
+
+.view-btn{
+  background:#007bff;
+}
+
+.adopt-btn{
+  background:#28a745;
+}
+
+.edit-btn{
+  background:#ff9800;
+}
+
+.delete-btn{
+  background:#dc3545;
+}
+
+.hidden{
+  display:none;
+}
+
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  background:white;
+  width:90%;
+  max-width:500px;
+  border-radius:15px;
+  padding:20px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:10px;
+  font-size:25px;
+  cursor:pointer;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+form input,
+form textarea,
+form select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+form button{
+  padding:12px;
+  background:#ff7b54;
+  color:white;
+  border:none;
+  border-radius:8px;
+}
+
+table{
+  width:100%;
+  margin-top:20px;
+  border-collapse:collapse;
+  background:white;
+}
+
+table th,
+table td{
+  padding:12px;
+  border:1px solid #ddd;
+}
+
+table th{
+  background:#ff7b54;
+  color:white;
+}
+
+.section-title{
+  margin:20px 0;
+}
