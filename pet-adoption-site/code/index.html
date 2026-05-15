@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PetAdopt</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    🐶 PetAdopt
+  </div>
+
+  <nav>
+
+    <a href="#pets">
+      Thú cưng
+    </a>
+
+    <a href="#reviews">
+      Đánh giá
+    </a>
+
+    <button onclick="toggleDarkMode()">
+      🌙
+    </button>
+
+  </nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>
+      Hãy Cho Các Bé Một Mái Ấm ❤️
+    </h1>
+
+    <p>
+      Hàng trăm thú cưng đang chờ được yêu thương
+    </p>
+
+    <button onclick="scrollToPets()">
+      Khám Phá Ngay
+    </button>
+
+  </div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats">
+
+  <div class="stat-box">
+    <h2>120+</h2>
+    <p>Thú cưng</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>80+</h2>
+    <p>Đã nhận nuôi</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>500+</h2>
+    <p>Người dùng</p>
+  </div>
+
+</section>
+
+<!-- PETS -->
+
+<section class="container" id="pets">
+
+  <h2 class="section-title">
+    Danh Sách Thú Cưng
+  </h2>
+
+  <div class="filters">
+
+    <select id="filterSpecies" onchange="renderPets()">
+
+      <option value="all">
+        Tất cả loài
+      </option>
+
+      <option value="Chó">
+        Chó
+      </option>
+
+      <option value="Mèo">
+        Mèo
+      </option>
+
+      <option value="Thỏ">
+        Thỏ
+      </option>
+
+    </select>
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Tìm thú cưng..."
+      onkeyup="renderPets()"
+    >
+
+  </div>
+
+  <div class="grid" id="petList"></div>
+
+</section>
+
+<!-- REVIEW -->
+
+<section class="reviews" id="reviews">
+
+  <h2>
+    Người Dùng Nói Gì?
+  </h2>
+
+  <div class="review-grid">
+
+    <div class="review-card">
+
+      <h3>
+        Nguyễn Văn A
+      </h3>
+
+      <p>
+        “Mình đã nhận nuôi được một bé corgi cực kỳ đáng yêu ❤️”
+      </p>
+
+    </div>
+
+    <div class="review-card">
+
+      <h3>
+        Trần Minh
+      </h3>
+
+      <p>
+        “Website rất đẹp và dễ dùng.”
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MODAL -->
+
+<div class="modal hidden" id="modal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeModal()">
+      &times;
+    </span>
+
+    <div id="modalBody"></div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
