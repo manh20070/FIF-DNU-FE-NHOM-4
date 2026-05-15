@@ -7,9 +7,7 @@ body{
     font-family: Arial;
     background: linear-gradient(135deg,#ff9a9e,#fad0c4);
 }
-
 /* KHUNG LOGIN */
-
 .login-box{
     width: 350px;
     background: white;
@@ -19,9 +17,7 @@ body{
     text-align: center;
     animation: hienLen 0.5s ease;
 }
-
 /* ICON */
-
 .logo{
     font-size: 60px;
     margin-bottom: 10px;
