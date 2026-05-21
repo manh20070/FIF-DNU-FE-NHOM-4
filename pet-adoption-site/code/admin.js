@@ -92,3 +92,89 @@ function xoaPet(index){
     hienThiPets();
 
 }
+// DANH SÁCH ĐƠN
+
+const requests = [
+
+    {
+        id: 1,
+        user: "Nguyễn Văn A",
+        pet: "Milu",
+        status: "Chờ duyệt"
+    },
+
+    {
+        id: 2,
+        user: "Trần Văn B",
+        pet: "Tom",
+        status: "Chờ duyệt"
+    }
+
+];
+
+const requestList = document.getElementById("requestList");
+
+// HIỂN THỊ ĐƠN
+
+function hienThiDon(){
+
+    requestList.innerHTML = "";
+
+    requests.forEach((request,index) => {
+
+        requestList.innerHTML += `
+        
+        <tr>
+
+            <td>${request.id}</td>
+
+            <td>${request.user}</td>
+
+            <td>${request.pet}</td>
+
+            <td>
+                ${request.status}
+            </td>
+
+            <td>
+
+    <button class="duyet" onclick="duyetDon(${index})">
+        Duyệt
+    </button>
+
+    <button class="tuchoi" onclick="tuChoiDon(${index})">
+        Từ chối
+    </button>
+
+</td>
+
+        </tr>
+
+        `;
+    });
+
+}
+
+// HIỂN THỊ
+
+hienThiDon();
+
+// DUYỆT
+
+function duyetDon(index){
+
+    requests[index].status = "Đã duyệt";
+
+    hienThiDon();
+
+}
+
+// TỪ CHỐI
+
+function tuChoiDon(index){
+
+    requests[index].status = "Từ chối";
+
+    hienThiDon();
+
+}
