@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetAdopt — Mái Ấm Cho Thú Cưng</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav>
+  <div class="nav-logo" onclick="showPublic()">
+    <span>🐾</span> PetAdopt
+  </div>
+  <div class="nav-links">
+    <a onclick="showPublic()">Trang chủ</a>
+    <a onclick="scrollToGrid()">Thú cưng</a>
+    <a onclick="showAdminPanel()">Admin</a>
+    <button class="btn-admin" onclick="showAdminPanel()">⚙ Quản trị</button>
+  </div>
+</nav>
+
+<!-- ========== PUBLIC VIEW ========== -->
+<div id="public-view">
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-paws">🐾</div>
+    <div class="hero-paws">🐾</div>
+    <div class="hero-paws">🐾</div>
+    <div class="hero-content">
+      <div class="hero-badge">💛 Kết nối yêu thương</div>
+      <h1>Mái Ấm Cho<br><em>Những Người Bạn Nhỏ</em></h1>
+      <p>Hàng chục thú cưng đang chờ đợi một gia đình yêu thương. Hãy mở rộng trái tim và mái ấm của bạn — cứu một sinh linh nhỏ, thay đổi cả cuộc đời bạn.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="stat-total">24</span>
+          <span class="stat-label">Thú cưng cần nhà</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="stat-adopted">47</span>
+          <span class="stat-label">Đã được nhận nuôi</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Năm hoạt động</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- FILTER BAR -->
+    <div class="filters-bar">
+      <span class="filter-label">Lọc:</span>
+      <div class="filter-chips">
+        <button class="chip active" onclick="filterPets('all', this)">🐾 Tất cả</button>
+        <button class="chip" onclick="filterPets('dog', this)">🐶 Chó</button>
+        <button class="chip" onclick="filterPets('cat', this)">🐱 Mèo</button>
+        <button class="chip" onclick="filterPets('rabbit', this)">🐰 Thỏ</button>
+        <button class="chip" onclick="filterPets('bird', this)">🦜 Chim</button>
+        <button class="chip" onclick="filterPets('other', this)">🐹 Khác</button>
+        <button class="chip" onclick="filterPets('available', this)">✅ Còn chỗ</button>
+        <button class="chip" onclick="filterPets('young', this)">🐣 Còn nhỏ</button>
+      </div>
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" placeholder="Tìm tên thú cưng..." oninput="searchPets(this.value)" id="search-input">
+      </div>
+    </div>
+
+    <!-- PET GRID -->
+    <div class="section-header">
+      <div class="section-title">🐾 Đang tìm mái ấm</div>
+      <span class="result-count" id="result-count">Hiển thị 24 thú cưng</span>
+    </div>
+    <div class="pet-grid" id="pet-grid"></div>
+
+  </main>
+</div>
+
+<!-- ========== PET DETAIL MODAL ========== -->
+<div class="overlay" id="modal-overlay" style="display:none;" onclick="closeModal(event)">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ========== ADMIN MODAL ========== -->
+<div class="overlay" id="admin-overlay" style="display:none;" onclick="closeAdmin(event)">
+  <div class="admin-panel" onclick="e=>e.stopPropagation()">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.3rem;">
+      <div class="admin-title">⚙ Bảng Quản Trị</div>
+      <button class="modal-close" style="position:static;" onclick="closeAdminPanel()">✕</button>
+    </div>
+    <div class="admin-subtitle">Mật khẩu: <b>admin123</b> — quản lý thú cưng & đơn nhận nuôi</div>
+
+    <!-- Login form -->
+    <div id="admin-auth">
+      <div class="form-group">
+        <label>Mật khẩu quản trị</label>
+        <input type="password" id="admin-pw" placeholder="Nhập mật khẩu..." onkeydown="if(event.key==='Enter')checkAdmin()">
+      </div>
+      <button class="btn-submit" onclick="checkAdmin()">Đăng nhập</button>
+    </div>
+
+    <!-- Admin content after login -->
+    <div id="admin-content" style="display:none;">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab('pets', this)">🐾 Thú cưng</button>
+        <button class="admin-tab" onclick="switchAdminTab('adoptions', this)">📋 Đơn nhận nuôi</button>
+        <button class="admin-tab" onclick="switchAdminTab('add', this)">➕ Thêm thú cưng</button>
+      </div>
+      <div id="admin-pets-tab"></div>
+      <div id="admin-adoptions-tab" style="display:none;"></div>
+      <div id="admin-add-tab" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TOAST NOTIFICATION ========== -->
+<div class="toast" id="toast" style="display:none;"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
