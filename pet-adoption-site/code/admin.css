@@ -1,0 +1,118 @@
+body{
+    margin: 0;
+    font-family: Arial;
+    background: #f4f4f4;
+}
+
+/* MENU */
+
+.sidebar{
+    width: 250px;
+    height: 100vh;
+    background: #222;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+}
+
+.sidebar h2{
+    text-align: center;
+}
+
+.sidebar a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+}
+
+.sidebar a:hover{
+    background: orange;
+}
+
+/* CONTENT */
+
+.content{
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.cards{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card{
+    background: white;
+    width: 220px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+}
+
+.card h3{
+    margin: 0;
+}
+
+.card p{
+    font-size: 30px;
+    color: orange;
+}
+
+/* TABLE */
+
+table{
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    background: white;
+}
+
+table th,
+table td{
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th{
+    background: orange;
+    color: white;
+}
+
+/* BUTTON */
+
+button{
+    padding: 8px 12px;
+    border: none;
+    background: red;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.form-add{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.form-add input{
+    padding: 10px;
+}
+
+.form-add button{
+    background: green;
+}
+.duyet{
+    background: green;
+}
+
+.tuchoi{
+    background: red;
+}
