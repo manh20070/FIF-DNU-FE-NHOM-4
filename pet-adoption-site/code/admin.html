@@ -1,116 +1,195 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-
-    <link rel="stylesheet" href="admin.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — PetAdopt Quản Trị</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
 </head>
-<body>
-<a href="#donNhanNuoi">Đơn nhận nuôi</a>
+<body class="admin-page">
 
-    <!-- MENU -->
+<!-- ========== ADMIN NAVBAR ========== -->
+<nav class="admin-nav">
+  <div class="nav-logo" onclick="window.location.href='index.html'">
+    <span>🐾</span> PetAdopt
+    <span class="admin-nav-badge">Admin</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">← Trang chủ</a>
+    <span class="nav-separator">|</span>
+    <span id="nav-status" style="font-size:0.82rem;color:rgba(255,255,255,0.55);">Chưa đăng nhập</span>
+    <button class="btn-logout" id="btn-logout" style="display:none;" onclick="logout()">Đăng xuất</button>
+  </div>
+</nav>
 
-    <div class="sidebar">
-
-        <h2>🐾 ADMIN</h2>
-
-        <a href="#">Dashboard</a>
-        <a href="#">Quản lý thú cưng</a>
-        <a href="#">Đơn nhận nuôi</a>
-        <a href="#">Người dùng</a>
-        <a href="#">Đăng xuất</a>
-
+<!-- ========== LOGIN SCREEN ========== -->
+<div id="admin-login-screen" class="admin-login-screen">
+  <div class="login-card">
+    <div class="login-icon">🔐</div>
+    <div class="login-title">Bảng Quản Trị</div>
+    <div class="login-subtitle">Đăng nhập để quản lý thú cưng và đơn nhận nuôi</div>
+    <div class="form-group">
+      <label>Mật khẩu quản trị</label>
+      <input type="password" id="admin-pw" placeholder="Nhập mật khẩu..." 
+             onkeydown="if(event.key==='Enter') checkAdmin()"
+             autocomplete="current-password">
     </div>
-
-    <!-- CONTENT -->
-
-    <div class="content">
-
-        <h1>Trang quản trị</h1>
-
-        <!-- THỐNG KÊ -->
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>Tổng thú cưng</h3>
-                <p id="tongThuCung"></p>
-            </div>
-
-            <div class="card">
-                <h3>Đơn nhận nuôi</h3>
-                <p id="tongDon"></p>
-            </div>
-
-            <div class="card">
-                <h3>Người dùng</h3>
-                <p id="tongUser"></p>
-            </div>
-
-        </div>
-        
-        <h2>Thêm thú cưng</h2>
-
-<div class="form-add">
-
-    <input type="text" id="name" placeholder="Tên thú cưng">
-
-    <input type="text" id="type" placeholder="Loại">
-
-    <input type="number" id="age" placeholder="Tuổi">
-
-    <button onclick="themPet()">
-        Thêm
-    </button>
-
+    <div class="login-hint">💡 Hint: <code>admin123</code></div>
+    <button class="btn-submit" onclick="checkAdmin()">🔓 Đăng nhập</button>
+  </div>
 </div>
 
-        <!-- BẢNG -->
+<!-- ========== ADMIN DASHBOARD ========== -->
+<div id="admin-dashboard" style="display:none;">
+  <div class="admin-layout">
 
-        <table>
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Quản lý</div>
+        <button class="sidebar-item active" id="tab-btn-pets" onclick="switchTab('pets')">
+          🐾 Thú cưng
+          <span class="sidebar-badge" id="badge-pets">0</span>
+        </button>
+        <button class="sidebar-item" id="tab-btn-adoptions" onclick="switchTab('adoptions')">
+          📋 Đơn nhận nuôi
+          <span class="sidebar-badge pending-badge" id="badge-adoptions">0</span>
+        </button>
+        <button class="sidebar-item" id="tab-btn-add" onclick="switchTab('add')">
+          ➕ Thêm thú cưng
+        </button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Thống kê nhanh</div>
+        <div class="sidebar-stat">
+          <span>Còn trống</span>
+          <strong id="s-available" style="color:var(--sage)">0</strong>
+        </div>
+        <div class="sidebar-stat">
+          <span>Đang chờ</span>
+          <strong id="s-pending" style="color:var(--gold)">0</strong>
+        </div>
+        <div class="sidebar-stat">
+          <span>Đã nhận nuôi</span>
+          <strong id="s-adopted" style="color:var(--terracotta)">0</strong>
+        </div>
+        <div class="sidebar-stat">
+          <span>Đơn mới</span>
+          <strong id="s-new-adopt" style="color:var(--brown)">0</strong>
+        </div>
+      </div>
+      <a href="index.html" class="sidebar-back-link">← Xem trang người dùng</a>
+    </aside>
 
-            <thead>
+    <!-- MAIN CONTENT -->
+    <main class="admin-main">
 
-                <tr>
-                    <th>ID</th>
-                    <th>Tên</th>
-                    <th>Loại</th>
-                    <th>Tuổi</th>
-                    <th>Hành động</th>
-                </tr>
+      <!-- PETS TAB -->
+      <div id="tab-pets" class="tab-panel">
+        <div class="panel-header">
+          <div class="panel-title">🐾 Danh sách thú cưng</div>
+          <div class="panel-actions">
+            <input class="admin-search" type="text" placeholder="🔍 Tìm theo tên..." oninput="filterAdminPets(this.value)" id="admin-pet-search">
+            <button class="btn-primary-sm" onclick="switchTab('add')">➕ Thêm mới</button>
+          </div>
+        </div>
+        <div id="admin-pets-content"></div>
+      </div>
 
-            </thead>
+      <!-- ADOPTIONS TAB -->
+      <div id="tab-adoptions" class="tab-panel" style="display:none;">
+        <div class="panel-header">
+          <div class="panel-title">📋 Đơn nhận nuôi</div>
+          <div class="panel-actions">
+            <select class="admin-filter-select" onchange="filterAdoptions(this.value)" id="adoption-filter">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="Đang xem xét">Đang xem xét</option>
+              <option value="Đã duyệt">Đã duyệt</option>
+              <option value="Từ chối">Từ chối</option>
+            </select>
+          </div>
+        </div>
+        <div id="admin-adoptions-content"></div>
+      </div>
 
-            <tbody id="petList">
+      <!-- ADD PET TAB -->
+      <div id="tab-add" class="tab-panel" style="display:none;">
+        <div class="panel-header">
+          <div class="panel-title">➕ Thêm thú cưng mới</div>
+        </div>
+        <div class="add-pet-form">
+          <div class="form-row">
+            <div class="form-group"><label>Tên *</label><input id="a-name" placeholder="Tên thú cưng"></div>
+            <div class="form-group"><label>Giống *</label><input id="a-breed" placeholder="Giống / breed"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Loài</label>
+              <select id="a-species">
+                <option value="dog">🐶 Chó</option>
+                <option value="cat">🐱 Mèo</option>
+                <option value="rabbit">🐰 Thỏ</option>
+                <option value="bird">🦜 Chim</option>
+                <option value="other">🐹 Khác</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Tuổi</label><input id="a-age" placeholder="VD: 2 năm, 6 tháng"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Giới tính</label>
+              <select id="a-gender"><option>Đực</option><option>Cái</option></select>
+            </div>
+            <div class="form-group">
+              <label>Kích thước</label>
+              <select id="a-size"><option>Rất nhỏ</option><option>Nhỏ</option><option>Trung</option><option>Lớn</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Emoji đại diện</label>
+              <input id="a-emoji" placeholder="VD: 🐶" value="🐾">
+            </div>
+            <div class="form-group">
+              <label>Màu lông</label>
+              <input id="a-color" placeholder="VD: Trắng, Nâu vàng...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô tả</label>
+            <textarea id="a-desc" placeholder="Mô tả tính cách, đặc điểm..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tags (phân cách bằng dấu phẩy)</label>
+            <input id="a-tags" placeholder="VD: Thân thiện, Đã tiêm, Sạch bóng">
+          </div>
+          <button class="btn-submit" onclick="addPet()">➕ Thêm thú cưng</button>
+        </div>
+      </div>
 
-            </tbody>
+    </main>
+  </div>
+</div>
 
-        </table>
-
-        <h2 id="donNhanNuoi">Đơn đăng ký nhận nuôi</h2>
-
-<table>
-
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Người nhận</th>
-            <th>Thú cưng</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-
-    <tbody id="requestList">
-
-    </tbody>
-
-</table>
+<!-- ========== CONFIRM DIALOG ========== -->
+<div class="overlay" id="confirm-overlay" style="display:none;">
+  <div class="confirm-dialog">
+    <div class="confirm-icon" id="confirm-icon">🗑</div>
+    <div class="confirm-title" id="confirm-title">Xác nhận xóa?</div>
+    <div class="confirm-msg" id="confirm-msg">Hành động này không thể hoàn tác.</div>
+    <div class="confirm-actions">
+      <button class="btn-cancel" onclick="closeConfirm()">Hủy</button>
+      <button class="btn-danger" id="confirm-ok" onclick="">Xác nhận</button>
     </div>
+  </div>
+</div>
 
+<!-- ========== TOAST ========== -->
+<div class="toast" id="toast" style="display:none;"></div>
 
-
-    <script src="admin.js"></script>
+<script src="shared.js"></script>
+<script src="admin.js"></script>
 </body>
 </html>
